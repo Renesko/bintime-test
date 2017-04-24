@@ -33,8 +33,6 @@ class OrderController extends Controller
     {
         $toInsert = $request->toArray();
 
-//        $total = 0;
-
         foreach ($toInsert['line'] as &$row) {
             $product = Product::find($row['product']);
 
@@ -43,8 +41,6 @@ class OrderController extends Controller
                 $row['name'] = $product->name;
 
                 unset($row['product']);
-
-//                $total = $total + $row['price'] * $row['count'];
             }
         }
 
