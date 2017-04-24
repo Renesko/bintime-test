@@ -42,6 +42,9 @@ Like that:
     MAIL_USERNAME=0a1de24b936ada
     MAIL_PASSWORD=c5dad98fd19896
 
+And now we can run queue processing "php artisan queue:listen".
+For example as background process using bash utility screen (need install)
+
 4. Elastic
 
 Run from site root command "php artisan vendor:publish"
