@@ -6,6 +6,7 @@ use App\Jobs\SendOrderEmail;
 use App\Models\Order;
 use App\Models\Product;
 use App\Http\Requests\OrderRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -67,15 +68,21 @@ class OrderController extends Controller
         }
 
         if ($request->username) {
-            $result->match('username', $request->username);
+            $result->querystring('*' . $request->username . '*' , ['fields' => [
+                'username',
+            ]]);
         }
 
         if ($request->surname) {
-            $result->match('surname', $request->surname);
+            $result->querystring('*' . $request->surname . '*' , ['fields' => [
+                'surname',
+            ]]);
         }
 
         if ($request->email) {
-            $result->match('email', $request->email);
+            $result->querystring('*' . $request->email . '*' , ['fields' => [
+                'email',
+            ]]);
         }
 
         if ($request->createDate) {
