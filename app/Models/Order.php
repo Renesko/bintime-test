@@ -11,7 +11,6 @@ use Sleimanx2\Plastic\Searchable;
  *
  * @mixin \Eloquent
  */
-
 class Order extends MongoModel
 {
     use Searchable;
@@ -25,17 +24,16 @@ class Order extends MongoModel
             'username' => $this->username,
             'surname' => $this->surname,
             'email' => $this->email,
-            'created_at' => $this->getElasticCreatedAt(),
+            'created_at' => $this->getElasticDate($this->created_at),
             'total' => $this->getTotal(),
         ];
     }
 
-    private function getElasticCreatedAt()
+    private function getElasticDate($date)
     {
-        if (isset($this->created_at)) {
-            return $this->created_at->format('Y-m-d');
-        } else {
-            return null;
+        if (isset($date)) {
+            $d = Carbon::createFromFormat('Y-m-d', $date);
+            return $d->format('Y-m-d');
         }
     }
 

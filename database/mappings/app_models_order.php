@@ -19,13 +19,13 @@ class AppModelsOrder extends Mapping
      */
     public function map()
     {
-        Map::create($this->getModelType(),function(Blueprint $map){
+        Map::create($this->getModelType(), function (Blueprint $map) {
             $map->string('id');
             $map->string('username');
             $map->string('surname');
             $map->string('email');
-            $map->date('created_at');
+            $map->date('created_at')->format('yyyy-MM-dd');;
             $map->float('total');
-        },$this->getModelIndex());
+        }, $this->getModelIndex());
     }
 }
