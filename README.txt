@@ -63,4 +63,4 @@ Run command "php artisan dusk" for browser testing form
 
 ----
 
-If needed to connect to MongoDB throw GUI utility, open file /etc/mongod.conf and modify bindIp to 0.0.0.0
+If needed to connect to MongoDB through GUI utility, open file /etc/mongod.conf and modify bindIp to 0.0.0.0
