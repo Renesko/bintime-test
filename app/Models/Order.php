@@ -33,7 +33,7 @@ class Order extends MongoModel
     private function getElasticCreatedAt()
     {
         if (isset($this->created_at)) {
-            return Carbon::createFromFormat('Y-m-d' , $this->created_at)->format('Y-m-d');
+            return $this->created_at->format('Y-m-d');
         } else {
             return null;
         }
