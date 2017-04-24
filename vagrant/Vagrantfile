@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant::configure(VAGRANTFILE_API_VERSION) do |config|
+
+    config.vm.provider :virtualbox do |vb|
+        vb.customize [
+            "modifyvm", :id,
+            "--memory", "4096",
+            "--cpus", "2",
+            "--ioapic", "on"
+        ]
+    end
+
+    config.vm.box = "ubuntu/xenial64"
+
+    config.vm.hostname = "bintime-test"
+    config.vm.synced_folder "./../", "/var/www/bintime-test", :nfs => true, :mount_options => ['nolock']
+
+    # Assign this VM to a host-only network IP, allowing you to access it
+    # via the IP. Host-only networks can talk to the host machine as well as
+    # any other machines on the same network, but cannot be accessed (through this
+    # network interface) by any external networks.
+
+    config.vm.network :private_network, ip: "192.168.50.95"
+
+   config.vm.network "forwarded_port", guest: 3000, host: 3000
+   config.vm.network "forwarded_port", guest: 27017, host: 27017
+
+    config.vm.provision :shell, path: "shell/install.sh"
+
+end
